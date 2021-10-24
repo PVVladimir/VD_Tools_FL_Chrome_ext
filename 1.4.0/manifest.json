@@ -4,7 +4,7 @@
   "name": "ВД - Инструменты ПЛ",
   "description": "Содержит ряд инструментов, автоматизирующих процессы обработки обращений на ПЛ.",
   "action": {
-    "default_popup": "hello.html",
+    "default_popup": "index.html",
     "default_icon": "vd_logo_16.png"
   },
   "icons": {
@@ -17,13 +17,6 @@
   ],
   "host_permissions": [
     "http://*/*", "https://*/*"
-  ],
-
-  "content_scripts": [
-    {
-      "js": ["script.js"],
-      "matches": ["http://*/*", "https://*/*"]
-    }
   ],
   "commands": {
     "_execute_action": {
