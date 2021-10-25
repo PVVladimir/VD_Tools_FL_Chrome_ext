@@ -1,5 +1,6 @@
 var sdLib = {};
 var curURL = window.location.hostname; //"about:blank";
+//var curURL = window.location.href; // надо проверить - текущий url страницы;
 
 document.addEventListener("click", function (event) {
   if (curURL == "vsegdadacom.webim.ru") {
@@ -10,13 +11,12 @@ document.addEventListener("click", function (event) {
 
   if (curURL == "loan.vsegda-da.com") {
     // Получем имя класса элемена, по которому произошло событие клик
-    let clickClass = event.target.className;
+    // let clickClass = event.target.className;
+    // console.log("classList contains lastApplicationStatus: ", event.target.classList.contains("lastApplicationStatus"));
     // Проверяем на соответствие требуемому классу
-    if (clickClass==="sc-dkiSSI fZAPLV") {
-      // Получаем родителя 1 уровня объекта, по которому было слбытие клик
-      let clickParent = event.target.parentNode;
-      // Получаем родителя 2 уровня объекта, по которому было слбытие клик
-      let divID = clickParent.parentNode;
+    if (event.target.classList.contains("lastApplicationStatus")) {
+      // Получаем родителя 4 уровня объекта, по которому было слбытие клик, в котором хранится ID заявки
+      let divID = (((event.target.parentNode).parentNode).parentNode).parentNode;
       // Открываем заявку от имени УБЛ
       if (event.altKey) window.open(`https://loan.vsegda-da.com/application/${divID.id}/form`, '_blank')
       // Открываем заявку от имени клиента
@@ -24,6 +24,11 @@ document.addEventListener("click", function (event) {
       // Анализируем данные по заявке
       else {
         console.log(divID.id);
+        let url = `https://omay-application.prod.rancher-prod.vsegda.da/omay-application/v2/applications/${divID.id}`;
+        window.open(url, '_blank');
+        
+        // https://www.youtube.com/watch?v=PNtFSVU-YTI
+
         // var req = new XMLHttpRequest();
         // //https://application-view-front-api.vsegda-da.com/omay-application-view-front-api/v1/applications/a0f53d26-082c-4e49-b66e-9c8e76a0a138/info?sellerplaceId=64c280f4-8115-48b9-a841-218e4631cef3
         // // let url = `https://application-view-front-api.vsegda-da.com/omay-application-view-front-api/v1/applications/a0f53d26-082c-4e49-b66e-9c8e76a0a138/info?sellerplaceId=64c280f4-8115-48b9-a841-218e4631cef3`
@@ -33,20 +38,18 @@ document.addEventListener("click", function (event) {
         // req.send(null);
         // var headers = req.getAllResponseHeaders().toLowerCase();
         // console.log(headers);
-        let url = `https://omay-application.prod.rancher-prod.vsegda.da/omay-application/v1/applications/${divID.id}`;
-        //let jsonResponse = getOmayResponse(url);
-        //console.log("Contents: ", jsonResponse);
-        window.open(url, '_blank');
-        url = `https://omay-application.prod.rancher-prod.vsegda.da/omay-application/v2/applications/${divID.id}`;
-        window.open(url, '_blank');
-        url = `https://omay-application.prod.rancher-prod.vsegda.da/omay-application/v3/applications/${divID.id}`;
-        window.open(url, '_blank');
+        // let url = `https://omay-application.prod.rancher-prod.vsegda.da/omay-application/v1/applications/${divID.id}`;
+        // let jsonResponse = getOmayResponse(url);
+        // console.log("Contents: ", jsonResponse);
+        // window.open(url, '_blank');
+        // url = `https://omay-application.prod.rancher-prod.vsegda.da/omay-application/v3/applications/${divID.id}`;
+        // window.open(url, '_blank');
         // $.getJSON(url, function(data) {
         //   console.log('Checkout this JSON! ', date);
         //   // JSON result in `data` variable
         // });
       }
-    //window.open(`https://application.vsegda-da.com/application/${appDiv.id}/remote-registration`, '_blank');
+    // window.open(`https://application.vsegda-da.com/application/${appDiv.id}/remote-registration`, '_blank');
       
     }
   }
