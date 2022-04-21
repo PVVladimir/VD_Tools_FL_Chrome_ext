@@ -15,18 +15,118 @@ document.addEventListener("click", function (event) {
     // console.log("classList contains lastApplicationStatus: ", event.target.classList.contains("lastApplicationStatus"));
     // Проверяем на соответствие требуемому классу
     if (event.target.classList.contains("lastApplicationStatus")) {
-      // Получаем родителя 4 уровня объекта, по которому было слбытие клик, в котором хранится ID заявки
-      let divID = (((event.target.parentNode).parentNode).parentNode).parentNode;
+      // Получаем родителя 4 уровня объекта, по которому было событие клик, в котором хранится ID заявки
+      let  divID= (((event.target.parentNode).parentNode).parentNode).parentNode;
       // Открываем заявку от имени УБЛ
       if (event.altKey) window.open(`https://loan.vsegda-da.com/application/${divID.id}/form`, '_blank')
       // Открываем заявку от имени клиента
       else if (event.ctrlKey) window.open(`https://application.vsegda-da.com/application/${divID.id}/remote-registration`, '_blank')
       // Анализируем данные по заявке
       else {
+        // Необходимо установить расширение в Хром 
+        // https://chrome.google.com/webstore/detail/allow-cors-access-control/lhobafahddgcelffkeicbaginigeejlf?hl=en
         console.log(divID.id);
+
+        // Работает - открывает нужную ссылку в новом окне
         let url = `https://omay-application.prod.rancher-prod.vsegda.da/omay-application/v2/applications/${divID.id}`;
         window.open(url, '_blank');
         
+
+        jQuery(document).ready(function () {
+          const url = `http://omay-application.prod.rancher-prod.vsegda.da/omay-application/v2/applications/${divID.id}`;
+          $.ajax({
+            url,
+            success: function (users) {
+              console.log("Success", users);
+            },
+            error: function () {
+              console.log("Error");
+            },
+            dataType: "jsonp",
+            type: "get",
+          });
+        });
+
+        // 
+        // // Работает - получает коллекцию данных JSON
+        // url = `https://gorest.co.in/public/v1/users`; //?callback=?
+        // $.getJSON(url, function(result) {
+        //   console.log("1. Request ur: ", url);
+        //   console.log('1. Checkout this JSON! ', result);
+        // });
+        
+        // Работает - получает коллекцию данных JSON
+        
+        // $.ajax({
+        //   url: `http://testlodtask20172.azurewebsites.net/task/qyfgqiyhwfoq1`, 
+        //   dataType: "jsonp",
+        //   success: function (data) {
+        //     // обрабатываем данные
+        //     console.log("3. Request ur: ", url);
+        //     console.log('3. Checkout this JSON! ', data);
+        //   }
+        // });
+
+        // $.get(
+        //   'https://omay-application.prod.rancher-prod.vsegda.da/omay-application/v2/applications/${divID.id}',
+        //   function (response) {
+        //       console.log("2.> ", response);
+        //       $("#viewer").html(response);
+        //   }
+        // );        
+
+        // $.ajaxPrefilter( function (options) {
+        //   if (options.crossDomain && jQuery.support.cors) {
+        //     console.log("3. cross and support");
+        //     var http = (window.location.protocol === 'http:' ? 'http:' : 'https:');
+        //     options.url = http + '//cors-anywhere.herokuapp.com/' + options.url;
+        //     console.log("3. options", options);
+        //     //options.url = "http://cors.corsproxy.io/url=" + options.url;
+        //   }
+        // });
+        
+        // $.get(
+        //     'omay-application.prod.rancher-prod.vsegda.da/omay-application/v2/applications/${divID.id}',
+        //     function (response) {
+        //         console.log("4.> ", response);
+        //         $("#viewer").html(response);
+        // });
+
+        // // НЕ Работает
+        // url = `https://omay-application.prod.rancher-prod.vsegda.da/omay-application/v2/applications/${divID.id}`; //?callback=?
+        // $.getJSON(url, function(result) {
+        //   console.log("Request ur: ", url);
+        //   console.log('Checkout this JSON! ', result);
+        // });
+
+        // // НЕ Работает с ?callback=? в конце запроса. Если я правильно понял обход проксирования
+        // url = `https://omay-application.prod.rancher-prod.vsegda.da/omay-application/v2/applications/${divID.id}?callback=?`; 
+        // $.getJSON(url, function(result) {
+        //   console.log("Request ur: ", url);
+        //   console.log('Checkout this JSON! ', result);
+        // });
+
+        // // НЕ Работает
+        // $.ajax({
+        //   url: `https://omay-application.prod.rancher-prod.vsegda.da/omay-application/v2/applications/${divID.id}`, 
+        //   dataType: "jsonp",
+        //   success: function (data) {
+        //     // обрабатываем данные
+        //     console.log('Checkout this JSON! ', data);
+        //   }
+        // });
+
+        // // НЕ Работает с ?callback=? в конце запроса. Если я правильно понял обход проксирования
+        // $.ajax({
+        //   url: `https://omay-application.prod.rancher-prod.vsegda.da/omay-application/v2/applications/${divID.id}?callback=?`, 
+        //   dataType: "jsonp",
+        //   success: function (data) {
+        //     // обрабатываем данные
+        //     console.log("3. Request ur: ", url);
+        //     console.log('3. Checkout this JSON! ', data);
+        //   }
+        // });
+
         // https://www.youtube.com/watch?v=PNtFSVU-YTI
 
         // var req = new XMLHttpRequest();

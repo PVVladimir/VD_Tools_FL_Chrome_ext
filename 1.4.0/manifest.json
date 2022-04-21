@@ -1,10 +1,22 @@
 {
   "manifest_version": 3,
-  "version": "1.4",
   "name": "ВД - Инструменты ПЛ",
   "description": "Содержит ряд инструментов, автоматизирующих процессы обработки обращений на ПЛ.",
+  "version": "1.4",
+  "author": "Владимир Филипкин",
+  "permissions": [
+    "tabs",
+    "scripting"
+  ],
+  "optional_permissions": [
+    "unlimitedStorage"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
   "action": {
     "default_popup": "index.html",
+    "default_title": "Click Me",
     "default_icon": "vd_logo_16.png"
   },
   "icons": {
@@ -12,12 +24,6 @@
     "48": "vd_logo_48.png",
     "128": "vd_logo_128.png"
   },
-  "permissions": [
-    "tabs", "storage", "scripting"
-  ],
-  "host_permissions": [
-    "http://*/*", "https://*/*"
-  ],
   "commands": {
     "_execute_action": {
       "suggested_key": {
@@ -31,3 +37,4 @@
     "scripts": ["jquery.min.js", "background.js"]
   }
 }
+
