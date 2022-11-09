@@ -32,9 +32,6 @@
       },
       "description": "Opens hello.html"
     }
-  },
-  "background": {
-    "scripts": ["jquery.min.js", "background.js"]
   }
 }
 

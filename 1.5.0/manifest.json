@@ -1,0 +1,41 @@
+{
+  "name": "ВД - Инструменты ПЛ",
+  "description": "Содержит ряд инструментов, автоматизирующих процессы обработки обращений на ПЛ.",
+  "version": "1.5",
+  "manifest_version": 3,
+  "action": {
+    "default_popup": "index.html",
+    "default_icon": {
+      "16": "vd_logo_16.png",
+      "32": "vd_logo_32.png",
+      "48": "vd_logo_48.png",
+      "128": "vd_logo_128.png"
+    }
+  },
+  "icons": {
+    "16": "vd_logo_16.png",
+    "32": "vd_logo_32.png",
+    "64": "vd_logo_64.png",
+    "128": "vd_logo_128.png"
+  }, 
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "permissions": [
+    "tabs", "storage", "activeTab", "webRequest"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*", "https://*/*"
+      ],
+      "js": [
+        "jquery.min.js"
+      ],
+      "css": [
+        "content.css"
+      ]
+    }
+  ]
+}
+
