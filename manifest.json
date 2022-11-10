@@ -4,7 +4,7 @@
   "version": "1.5",
   "manifest_version": 3,
   "action": {
-    "default_popup": "index.html",
+    "default_popup": "popup.html",
     "default_icon": {
       "16": "vd_logo_16.png",
       "32": "vd_logo_32.png",
