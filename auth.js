@@ -33,15 +33,41 @@ logonBtn.addEventListener("click", async () => {
     let url = "http://omay-authentication.prod.rancher-prod.vsegda.da/oauth/token?grant_type=client_credentials";
     let authBase64 = "Basic " + btoa(clientInfo["clientId"] + ":" + clientInfo["password"]);
     console.log("b64: " + authBase64);
-    let response = fetch(url, {
+    await fetch(url, {
       method: 'POST',
       headers: {
         Authorization: authBase64        
       },
       body: ""
+    })
+    .then(authResponse => authResponse.json())
+    .then(authBody => chrome.storage.local.set({ access_token: authBody["access_token"], authorities: authBody["authorities"] }));
+    
+    //  let access_token;
+    //  let authorities = {};
+    
+    // chrome.storage.local.get(['access_token', 'authorities'], result => {
+    //   access_token = result.access_token;
+    //   authorities = result.authorities;
+    //   console.log(access_token);
+    //   console.log(authorities);
+    //   });
+
+    //   console.log(access_token);
+    //   console.log(authorities);
+      // chrome.storage.local.get(['authorities'], result => {
+    // });
+    const roleList = await new Promise((resolve) => {
+      chrome.storage.local.get(['access_token', 'authorities'], result => resolve(result))
     });
-    console.log("new code1");
-    console.log((await response).json());
+    
+    console.log(roleList);
+
+    // console.log("new code1");
+    // console.log(authResponse);
+    // let authBody = authResponse.json();
+    // console.log(authBody["access_token"]);
+    // console.log(authBody["authorities"]);
   } else {
     console.log("not ok");
   }
@@ -54,6 +80,8 @@ logonBtn.addEventListener("click", async () => {
 //  })
 // .then(response => response.json())
 // .then(json => console.log(json));
+
+
   // Authentication: authBase64,
   // 'Content-Type': 'application/json;charset=utf-8'
 //  'Postman-Token': 'd4ca49f1-2d94-462e-b52d-21e1e0e714b2',

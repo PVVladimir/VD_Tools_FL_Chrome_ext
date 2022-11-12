@@ -1,7 +1,7 @@
 {
   "name": "ВД 3.0 - Инструменты SD",
   "description": "Содержит ряд инструментов, автоматизирующих рабочее место специалиста поддержки.",
-  "version": "1.5",
+  "version": "2.0.0",
   "manifest_version": 3,
   "action": {
     "default_popup": "popup.html",
@@ -30,7 +30,8 @@
         "http://*/*", "https://*/*"
       ],
       "js": [
-        "jquery.min.js"
+        "jquery.min.js", 
+        "loan.js"
       ],
       "css": [
         "content.css"
